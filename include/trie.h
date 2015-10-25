@@ -11,11 +11,12 @@ class trie {
 
   private:
     node *create_node();
+    void delete_node(node *n);
 
   public:
     trie();
     ~trie();
-    void delete_node(node *n);
+    void erase();
     unsigned int size() const;
     void insert(std::string key, unsigned int value);
     bool exists(std::string key, unsigned int &value) const;

@@ -7,7 +7,7 @@ trie::trie(): size_(0) {
 }
 
 trie::~trie() {
-  delete_node(root);
+  erase();
 }
 
 unsigned int trie::size() const {
@@ -27,6 +27,12 @@ void trie::delete_node(node *n) {
   }
 
   delete n;
+}
+
+void trie::erase() {
+  delete_node(root);
+  root = nullptr;
+  size_ = 0;
 }
 
 void trie::insert(std::string key, unsigned int value) {

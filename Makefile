@@ -23,4 +23,4 @@ keyword_matcher.o: $(INCDIR)/keyword_matcher.h
 	$(CC) $(CFLAGS) -I$(INCDIR) $(SRCDIR)/keyword_matcher.cpp
 
 clean:
-	rm -f *.o main
+	rm -f *.o main; rm -rf main.dSYM
