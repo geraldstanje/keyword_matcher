@@ -1,8 +1,11 @@
 #include "trie.h"
 #include "util.h"
+#include <iostream>
+#include <cassert>
 
 trie::trie(): size_(0) {
     root = create_node();
+    iter = nullptr;
 }
 
 trie::~trie() {
@@ -31,10 +34,11 @@ void trie::delete_node(node *n) {
 void trie::erase() {
     delete_node(root);
     root = nullptr;
+    iter = nullptr;
     size_ = 0;
 }
 
-bool trie::insert(const std::string key, const unsigned int value) {
+bool trie::insert(const std::string key, const int value) {
     node *tmp = root;
 
     for (int i = 0; i < key.size(); i++) {
@@ -59,29 +63,40 @@ bool trie::insert(const std::string key, const unsigned int value) {
     return true;
 }
 
-bool trie::exists_key(std::string::const_iterator begin, std::string::const_iterator end, unsigned int &value) const {
-    node *tmp = root;
+void trie::iter_begin() {
+    iter = root;
+}
+
+void trie::iter_reset() {
+    iter = nullptr;
+}
+
+bool trie::exists_key(std::string::const_iterator begin, std::string::const_iterator end, int &value) {
+    if (iter == nullptr) {
+        iter_begin();
+    }
 
     for (auto it = begin; it != end; it++) {
         char k = 0;
 
         if (!calc_node_index(*it, k)) {
+            iter_reset();
             return false;
         }
 
-        if (tmp->next[k] != nullptr) {
-            tmp = tmp->next[k];
+        if (iter->next[k] != nullptr) {
+            iter = iter->next[k];
         } else {
             return false; // key not found
         }
     }
 
-    if (tmp == nullptr) {
+    if (iter == nullptr) {
         return false;
     }
 
-    if (tmp->is_terminal) {
-        value = tmp->value;
+    if (iter->is_terminal) {
+        value = iter->value;
         return true;
     }
 

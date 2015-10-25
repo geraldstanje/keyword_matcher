@@ -7,7 +7,7 @@ const int ALPHABET_SIZE = 28;
 
 class node {
   public:
-    unsigned int value;
+    int value;
     node *next[ALPHABET_SIZE];
     bool is_terminal;
     bool is_end;
