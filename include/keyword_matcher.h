@@ -14,7 +14,7 @@ class keyword_matcher {
     keyword_matcher();
     bool load_bag_of_words(const std::string &filename);
     void load_bag_of_words(const std::vector<std::string> &bag_of_words);
-    std::vector<bool> match_keywords(const std::string &url);
+    std::vector<unsigned int> match_keywords(const std::string &url);
 };
 
 #endif

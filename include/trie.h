@@ -19,7 +19,7 @@ class trie {
     void erase();
     unsigned int size() const;
     bool insert(const std::string key, const unsigned int value);
-    bool exists(const std::string key, unsigned int &value) const;
+    bool exists_key(std::string::const_iterator begin, std::string::const_iterator end, unsigned int &value) const;
 };
 
 #endif

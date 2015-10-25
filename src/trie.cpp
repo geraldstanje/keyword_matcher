@@ -40,15 +40,8 @@ bool trie::insert(const std::string key, const unsigned int value) {
     for (int i = 0; i < key.size(); i++) {
         char k = 0;
 
-        if (is_alpha(key[i])) {
-            k = tolower(key[i]) - 'a';
-        } else {
-            auto it = special_chars.find(key[i]);
-            if (it != special_chars.end()) {
-                k = it->second;
-            } else {
-                return false;
-            }
+        if (!calc_node_index(key[i], k)) {
+            return false;
         }
 
         if (tmp->next[k] == nullptr) {
@@ -66,15 +59,15 @@ bool trie::insert(const std::string key, const unsigned int value) {
     return true;
 }
 
-bool trie::exists(const std::string key, unsigned int &value) const {
+bool trie::exists_key(std::string::const_iterator begin, std::string::const_iterator end, unsigned int &value) const {
     node *tmp = root;
 
-    for (int i = 0; i < key.size(); i++) {
-        if (!is_alpha(key[i])) {
+    for (auto it = begin; it != end; it++) {
+        char k = 0;
+
+        if (!calc_node_index(*it, k)) {
             return false;
         }
-
-        char k = tolower(key[i]) - 'a';
 
         if (tmp->next[k] != nullptr) {
             tmp = tmp->next[k];
@@ -83,10 +76,16 @@ bool trie::exists(const std::string key, unsigned int &value) const {
         }
     }
 
-    if (tmp != nullptr && tmp->is_terminal) {
+    if (tmp == nullptr) {
+        return false;
+    }
+
+    if (tmp->is_terminal) {
         value = tmp->value;
         return true;
     }
 
-    return false;
+    // we found the key in the trie but its not a terminal
+    value = -1;
+    return true;
 }

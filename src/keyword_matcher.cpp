@@ -1,6 +1,9 @@
 #include "keyword_matcher.h"
 #include <iostream>
 #include <fstream>
+#include <chrono>
+
+//#define BENCHMARKING
 
 keyword_matcher::keyword_matcher(): bag_of_words_size(0) {
 }
@@ -38,18 +41,43 @@ void keyword_matcher::load_bag_of_words(const std::vector<std::string> &bag_of_w
     }
 }
 
-std::vector<bool> keyword_matcher::match_keywords(const std::string &url) {
-    std::vector<bool> vec(bag_of_words_size, 0);
+void printString(std::string::const_iterator begin, std::string::const_iterator end) {
+    for (auto it = begin; it != end; it++) {
+        std::cout << *it;
+    }
+    std::cout << '\n';
+}
 
-    for (int start = 0; start < url.size() - 1; start++) {
+std::vector<unsigned int> keyword_matcher::match_keywords(const std::string &url) {
+#ifdef BENCHMARKING
+    auto start = std::chrono::steady_clock::now();
+#endif
+
+    std::vector<unsigned int> vec(bag_of_words_size, 0);
+
+    for (int start = 0; start < url.size(); start++) {
         for (int len = 1; len <= url.size() - start; len++) {
             unsigned int index = 0;
 
-            if (t.exists(url.substr(start, len), index)) {
-                vec[index] = true;
+            printString(url.begin() + start, url.begin() + start + len);
+
+            bool key_exists = t.exists_key(url.begin() + start, url.begin() + start + len, index);
+            if (key_exists && index != -1) {
+                std::cout << url.substr(start, len) << ", " << index << std::endl;
+                vec[index] = 1;
+            }
+
+            if (!key_exists) {
+                break;
             }
         }
     }
+
+#ifdef BENCHMARKING
+    auto end = std::chrono::steady_clock::now();
+    auto diff = end - start;
+    std::cerr << std::chrono::duration <double, std::milli> (diff).count();
+#endif
 
     return vec;
 }

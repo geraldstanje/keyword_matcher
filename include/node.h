@@ -11,15 +11,13 @@ class node {
     node *next[ALPHABET_SIZE];
     bool is_terminal;
     bool is_end;
-    node(): value(0), is_terminal(false), is_end(false) {
-        for (int i = 0; i < ALPHABET_SIZE; i++) {
-            next[i] = nullptr;
-        }
-    }
+    node();
 };
 
 const std::unordered_map<char, char> special_chars = {{'_', 26},
     {'-', 27}
 };
+
+bool calc_node_index(const char &key, char &index);
 
 #endif

@@ -1,7 +1,7 @@
 all: main
 INCDIR = ./include
 SRCDIR = src
-OBJS = util.o trie.o keyword_matcher.o main.o
+OBJS = util.o node.o trie.o keyword_matcher.o main.o
 CC = g++
 DEBUG = -g
 CFLAGS = -Wall -O3 -c $(DEBUG) -std=c++14
@@ -13,7 +13,10 @@ main: $(OBJS)
 util.o: $(INCDIR)/util.h
 	$(CC) $(CFLAGS) -I$(INCDIR) $(SRCDIR)/util.cpp
 
-trie.o: $(INCDIR)/node.h $(INCDIR)/util.h $(INCDIR)/trie.h
+node.o: $(INCDIR)/node.h
+	$(CC) $(CFLAGS) -I$(INCDIR) $(SRCDIR)/node.cpp
+
+trie.o: $(INCDIR)/trie.h
 	$(CC) $(CFLAGS) -I$(INCDIR) $(SRCDIR)/trie.cpp
 
 main.o: $(INCDIR)/keyword_matcher.h
