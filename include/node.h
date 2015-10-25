@@ -1,7 +1,9 @@
 #ifndef NODE_H
 #define NODE_H
 
-const int ALPHABET_SIZE = 26;
+#include <unordered_map>
+
+const int ALPHABET_SIZE = 28;
 
 class node {
   public:
@@ -14,6 +16,10 @@ class node {
             next[i] = nullptr;
         }
     }
+};
+
+const std::unordered_map<char, char> special_chars = {{'_', 26},
+    {'-', 27}
 };
 
 #endif

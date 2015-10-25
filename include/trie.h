@@ -18,7 +18,7 @@ class trie {
     ~trie();
     void erase();
     unsigned int size() const;
-    void insert(std::string key, unsigned int value);
+    bool insert(std::string key, unsigned int value);
     bool exists(std::string key, unsigned int &value) const;
 };
 

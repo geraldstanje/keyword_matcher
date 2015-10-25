@@ -13,6 +13,9 @@ int main() {
     keyword_matcher m;
 
     m.load_bag_of_words(std::vector<std::string> {"he", "hel", "hi"});
-    auto vec = m.match_keywords("http://hello.com");
-    print(vec);
+    auto vec1 = m.match_keywords("http://hello.com");
+    print(vec1);
+
+    m.load_bag_of_words("dataset/vocab.nytimes.txt");
+    auto vec2 = m.match_keywords("http://hello.com");
 }

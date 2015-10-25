@@ -1,17 +1,16 @@
 #include "trie.h"
 #include "util.h"
-#include <iostream>
 
 trie::trie(): size_(0) {
     root = create_node();
 }
 
 trie::~trie() {
-  erase();
+    erase();
 }
 
 unsigned int trie::size() const {
-  return size_;
+    return size_;
 }
 
 node *trie::create_node() {
@@ -20,26 +19,37 @@ node *trie::create_node() {
 }
 
 void trie::delete_node(node *n) {
-  for (int i = 0; i < ALPHABET_SIZE; i++) {
-    if (n->next[i] != nullptr) {
-      delete_node(n->next[i]);
+    for (int i = 0; i < ALPHABET_SIZE; i++) {
+        if (n->next[i] != nullptr) {
+            delete_node(n->next[i]);
+        }
     }
-  }
 
-  delete n;
+    delete n;
 }
 
 void trie::erase() {
-  delete_node(root);
-  root = nullptr;
-  size_ = 0;
+    delete_node(root);
+    root = nullptr;
+    size_ = 0;
 }
 
-void trie::insert(std::string key, unsigned int value) {
+bool trie::insert(std::string key, unsigned int value) {
     node *tmp = root;
 
     for (int i = 0; i < key.size(); i++) {
-        char k = tolower(key[i]) - 'a';
+        char k = 0;
+
+        if (is_alpha(key[i])) {
+            k = tolower(key[i]) - 'a';
+        } else {
+            auto it = special_chars.find(key[i]);
+            if (it != special_chars.end()) {
+                k = it->second;
+            } else {
+                return false;
+            }
+        }
 
         if (tmp->next[k] == nullptr) {
             tmp->next[k] = create_node();
@@ -53,6 +63,7 @@ void trie::insert(std::string key, unsigned int value) {
     tmp->is_end = true;
     tmp->value = value;
     size_++;
+    return true;
 }
 
 bool trie::exists(std::string key, unsigned int &value) const {
