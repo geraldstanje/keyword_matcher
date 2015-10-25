@@ -1,9 +1,10 @@
 #include "keyword_matcher.h"
 #include <cassert>
 #include <iostream>
+#include <cstdint>
 
-void print(std::vector<unsigned int> &vec) {
-    for (int i = 0; i < vec.size(); i++) {
+void print(std::vector<uint16_t> &vec) {
+    for (uint16_t i = 0; i < vec.size(); i++) {
         std::cout << vec[i];
     }
     std::cout << '\n';
@@ -18,4 +19,5 @@ int main() {
 
     //m.load_bag_of_words("dataset/vocab.nytimes.txt");
     //auto vec2 = m.match_keywords("http://hello.com");
+    //print(vec2);
 }

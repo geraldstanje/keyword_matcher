@@ -2,6 +2,7 @@
 #include "util.h"
 #include <iostream>
 #include <cassert>
+#include <cstdint>
 
 trie::trie(): size_(0) {
     root = create_node();
@@ -12,7 +13,7 @@ trie::~trie() {
     erase();
 }
 
-unsigned int trie::size() const {
+uint16_t trie::size() const {
     return size_;
 }
 
@@ -22,7 +23,7 @@ node *trie::create_node() {
 }
 
 void trie::delete_node(node *n) {
-    for (int i = 0; i < ALPHABET_SIZE; i++) {
+    for (uint16_t i = 0; i < ALPHABET_SIZE; i++) {
         if (n->next[i] != nullptr) {
             delete_node(n->next[i]);
         }
@@ -38,10 +39,10 @@ void trie::erase() {
     size_ = 0;
 }
 
-bool trie::insert(const std::string key, const int value) {
+bool trie::insert(const std::string key, const int16_t value) {
     node *tmp = root;
 
-    for (int i = 0; i < key.size(); i++) {
+    for (uint16_t i = 0; i < key.size(); i++) {
         char k = 0;
 
         if (!calc_node_index(key[i], k)) {
@@ -68,7 +69,7 @@ void trie::iter_begin() {
     iter = root;
 }
 
-bool trie::exists_key(std::string::const_iterator begin, std::string::const_iterator end, int &value) {
+bool trie::exists_key(std::string::const_iterator begin, std::string::const_iterator end, int16_t &value) {
     if (iter == nullptr) {
         return false;
     }

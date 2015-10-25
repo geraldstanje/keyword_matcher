@@ -1,9 +1,10 @@
 #include "node.h"
 #include "util.h"
 #include <iostream>
+#include <cstdint>
 
 node::node(): value(0), is_terminal(false), is_end(false) {
-    for (int i = 0; i < ALPHABET_SIZE; i++) {
+    for (uint16_t i = 0; i < ALPHABET_SIZE; i++) {
         next[i] = nullptr;
     }
 }

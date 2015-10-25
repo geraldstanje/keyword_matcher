@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <chrono>
+#include <cstdint>
 
 //#define BENCHMARKING
 
@@ -41,18 +42,18 @@ void keyword_matcher::load_bag_of_words(const std::vector<std::string> &bag_of_w
     }
 }
 
-std::vector<unsigned int> keyword_matcher::match_keywords(const std::string &url) {
+std::vector<uint16_t> keyword_matcher::match_keywords(const std::string &url) {
 #ifdef BENCHMARKING
     auto start = std::chrono::steady_clock::now();
 #endif
 
-    std::vector<unsigned int> vec(bag_of_words_size, 0);
+    std::vector<uint16_t> vec(bag_of_words_size, 0);
 
-    for (int start = 0; start < url.size(); start++) {
-        unsigned int offset = 0;
+    for (uint16_t start = 0; start < url.size(); start++) {
+        uint16_t offset = 0;
 
-        for (int len = 1; len <= url.size() - start; len++) {
-            int index = 0;
+        for (uint16_t len = 1; len <= url.size() - start; len++) {
+            int16_t index = 0;
 
             bool key_exists = t.exists_key(url.begin() + start + offset, url.begin() + start + len, index);
             if (key_exists && index != -1) {

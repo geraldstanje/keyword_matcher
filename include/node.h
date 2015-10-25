@@ -2,12 +2,13 @@
 #define NODE_H
 
 #include <unordered_map>
+#include <cstdint>
 
-const int ALPHABET_SIZE = 28;
+const uint16_t ALPHABET_SIZE = 28;
 
 class node {
   public:
-    int value;
+    int16_t value;
     node *next[ALPHABET_SIZE];
     bool is_terminal;
     bool is_end;

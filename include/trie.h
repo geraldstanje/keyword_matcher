@@ -3,12 +3,13 @@
 
 #include "node.h"
 #include <string>
+#include <cstdint>
 
 class trie {
   private:
     node *root;
     node *iter;
-    unsigned int size_;
+    uint16_t size_;
 
   private:
     node *create_node();
@@ -19,9 +20,9 @@ class trie {
     trie();
     ~trie();
     void erase();
-    unsigned int size() const;
-    bool insert(const std::string key, const int value);
-    bool exists_key(std::string::const_iterator begin, std::string::const_iterator end, int &value);
+    uint16_t size() const;
+    bool insert(const std::string key, const int16_t value);
+    bool exists_key(std::string::const_iterator begin, std::string::const_iterator end, int16_t &value);
 };
 
 #endif
