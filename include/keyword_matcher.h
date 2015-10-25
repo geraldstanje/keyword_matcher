@@ -2,7 +2,6 @@
 #define KEYWORD_MATCHER_H
 
 #include "trie.h"
-#include "keyword_matcher.h"
 #include <vector>
 #include <cstdint>
 
