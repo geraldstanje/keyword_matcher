@@ -14,7 +14,6 @@ class trie {
     node *create_node();
     void delete_node(node *n);
     void iter_begin();
-    void iter_reset();
 
   public:
     trie();

@@ -60,6 +60,7 @@ bool trie::insert(const std::string key, const int value) {
     tmp->is_end = true;
     tmp->value = value;
     size_++;
+    iter_begin();
     return true;
 }
 
@@ -67,31 +68,29 @@ void trie::iter_begin() {
     iter = root;
 }
 
-void trie::iter_reset() {
-    iter = nullptr;
-}
-
 bool trie::exists_key(std::string::const_iterator begin, std::string::const_iterator end, int &value) {
     if (iter == nullptr) {
-        iter_begin();
+        return false;
     }
 
     for (auto it = begin; it != end; it++) {
         char k = 0;
 
         if (!calc_node_index(*it, k)) {
-            iter_reset();
+            iter_begin();
             return false;
         }
 
         if (iter->next[k] != nullptr) {
             iter = iter->next[k];
         } else {
+            iter_begin();
             return false; // key not found
         }
     }
 
     if (iter == nullptr) {
+        iter_begin();
         return false;
     }
 

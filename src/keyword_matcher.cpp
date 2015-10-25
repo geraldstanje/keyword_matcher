@@ -3,7 +3,7 @@
 #include <fstream>
 #include <chrono>
 
-#define BENCHMARKING
+//#define BENCHMARKING
 
 keyword_matcher::keyword_matcher(): bag_of_words_size(0) {
 }
