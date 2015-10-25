@@ -34,7 +34,7 @@ void trie::erase() {
     size_ = 0;
 }
 
-bool trie::insert(std::string key, unsigned int value) {
+bool trie::insert(const std::string key, const unsigned int value) {
     node *tmp = root;
 
     for (int i = 0; i < key.size(); i++) {
@@ -66,7 +66,7 @@ bool trie::insert(std::string key, unsigned int value) {
     return true;
 }
 
-bool trie::exists(std::string key, unsigned int &value) const {
+bool trie::exists(const std::string key, unsigned int &value) const {
     node *tmp = root;
 
     for (int i = 0; i < key.size(); i++) {
