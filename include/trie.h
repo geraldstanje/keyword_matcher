@@ -7,6 +7,7 @@
 class trie {
   private:
     node *root;
+    unsigned int size_;
 
   private:
     node *create_node();
@@ -14,8 +15,10 @@ class trie {
   public:
     trie();
     ~trie();
-    void add(std::string key, unsigned int value);
-    bool exists(std::string key, unsigned int &value);
+    void delete_node(node *n);
+    unsigned int size() const;
+    void insert(std::string key, unsigned int value);
+    bool exists(std::string key, unsigned int &value) const;
 };
 
 #endif
