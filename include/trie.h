@@ -5,18 +5,17 @@
 #include <string>
 
 class trie {
-private:
-  node *root;
+  private:
+    node *root;
 
-private:
-  node *create_node();
-  bool is_terminal(node *n);
+  private:
+    node *create_node();
 
-public:
-  trie();
-  ~trie();
-  void add(std::string key);
-  bool exists(std::string key);
+  public:
+    trie();
+    ~trie();
+    void add(std::string key, unsigned int value);
+    bool exists(std::string key, unsigned int &value);
 };
 
 #endif

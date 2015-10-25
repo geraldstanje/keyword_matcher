@@ -1,20 +1,26 @@
-all: keywordMatcher
+all: main
 INCDIR = ./include
 SRCDIR = src
-OBJS = trie.o main.o
+OBJS = util.o trie.o keyword_matcher.o main.o
 CC = g++
 DEBUG = -g
 CFLAGS = -Wall -O3 -c $(DEBUG) -std=c++14
 LFLAGS = -Wall $(DEBUG)
 
-keywordMatcher: $(OBJS)
-	$(CC) $(OBJS) -o keywordMatcher $(LFLAGS)
+main: $(OBJS)
+	$(CC) $(OBJS) -o main $(LFLAGS)
 
-trie.o: $(INCDIR)/node.h $(INCDIR)/trie.h
+util.o: $(INCDIR)/util.h
+	$(CC) $(CFLAGS) -I$(INCDIR) $(SRCDIR)/util.cpp
+
+trie.o: $(INCDIR)/node.h $(INCDIR)/util.h $(INCDIR)/trie.h
 	$(CC) $(CFLAGS) -I$(INCDIR) $(SRCDIR)/trie.cpp
 
-main.o: $(INCDIR)/trie.h
+main.o: $(INCDIR)/keyword_matcher.h
 	$(CC) $(CFLAGS) -I$(INCDIR) main.cpp
 	    
+keyword_matcher.o: $(INCDIR)/keyword_matcher.h
+	$(CC) $(CFLAGS) -I$(INCDIR) $(SRCDIR)/keyword_matcher.cpp
+
 clean:
-	rm -f *.o keywordMatcher
+	rm -f *.o main
