@@ -3,9 +3,9 @@
 #include <iostream>
 #include <cstdint>
 
-node::node(): value(0), is_terminal(false), is_end(false) {
+node::node(): value_(0), is_terminal_(false), is_end_(false) {
     for (uint16_t i = 0; i < ALPHABET_SIZE; i++) {
-        next[i] = nullptr;
+        next_[i] = nullptr;
     }
 }
 

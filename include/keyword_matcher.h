@@ -7,8 +7,8 @@
 
 class keyword_matcher {
   private:
-    uint16_t bag_of_words_size;
-    trie t; // stores the keyword as a key + index as a value, the index refers to the bag_of_words vector index
+    uint16_t bag_of_words_size_;
+    trie trie_; // stores the keyword as a key + index as a value, the index refers to the bag_of_words vector index
 
   public:
     keyword_matcher();

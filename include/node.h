@@ -8,10 +8,10 @@ const uint16_t ALPHABET_SIZE = 28;
 
 class node {
   public:
-    int16_t value;
-    node *next[ALPHABET_SIZE];
-    bool is_terminal;
-    bool is_end;
+    int16_t value_;
+    node *next_[ALPHABET_SIZE];
+    bool is_terminal_;
+    bool is_end_;
     node();
 };
 

@@ -7,8 +7,8 @@
 
 class trie {
   private:
-    node *root;
-    node *iter;
+    node *root_;
+    node *iter_;
     uint16_t size_;
 
   private:

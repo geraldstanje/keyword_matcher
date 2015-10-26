@@ -5,8 +5,8 @@
 #include <cstdint>
 
 trie::trie(): size_(0) {
-    root = create_node();
-    iter = nullptr;
+    root_ = create_node();
+    iter_ = nullptr;
 }
 
 trie::~trie() {
@@ -24,8 +24,8 @@ node *trie::create_node() {
 
 void trie::delete_node(node *n) {
     for (uint16_t i = 0; i < ALPHABET_SIZE; i++) {
-        if (n->next[i] != nullptr) {
-            delete_node(n->next[i]);
+        if (n->next_[i] != nullptr) {
+            delete_node(n->next_[i]);
         }
     }
 
@@ -33,14 +33,14 @@ void trie::delete_node(node *n) {
 }
 
 void trie::erase() {
-    delete_node(root);
-    root = nullptr;
-    iter = nullptr;
+    delete_node(root_);
+    root_ = nullptr;
+    iter_ = nullptr;
     size_ = 0;
 }
 
 bool trie::insert(const std::string key, const int16_t value) {
-    node *tmp = root;
+    node *tmp = root_;
 
     for (uint16_t i = 0; i < key.size(); i++) {
         char k = 0;
@@ -49,28 +49,28 @@ bool trie::insert(const std::string key, const int16_t value) {
             return false;
         }
 
-        if (tmp->next[k] == nullptr) {
-            tmp->next[k] = create_node();
+        if (tmp->next_[k] == nullptr) {
+            tmp->next_[k] = create_node();
         }
 
-        tmp->is_end = false;
-        tmp = tmp->next[k];
+        tmp->is_end_ = false;
+        tmp = tmp->next_[k];
     }
 
-    tmp->is_terminal = true;
-    tmp->is_end = true;
-    tmp->value = value;
+    tmp->is_terminal_ = true;
+    tmp->is_end_ = true;
+    tmp->value_ = value;
     size_++;
     iter_begin();
     return true;
 }
 
 void trie::iter_begin() {
-    iter = root;
+    iter_ = root_;
 }
 
 bool trie::exists_key(std::string::const_iterator begin, std::string::const_iterator end, int16_t &value) {
-    if (iter == nullptr) {
+    if (iter_ == nullptr) {
         return false;
     }
 
@@ -82,21 +82,21 @@ bool trie::exists_key(std::string::const_iterator begin, std::string::const_iter
             return false;
         }
 
-        if (iter->next[k] != nullptr) {
-            iter = iter->next[k];
+        if (iter_->next_[k] != nullptr) {
+            iter_ = iter_->next_[k];
         } else {
             iter_begin();
             return false; // key not found
         }
     }
 
-    if (iter == nullptr) {
+    if (iter_ == nullptr) {
         iter_begin();
         return false;
     }
 
-    if (iter->is_terminal) {
-        value = iter->value;
+    if (iter_->is_terminal_) {
+        value = iter_->value_;
         return true;
     }
 
