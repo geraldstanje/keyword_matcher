@@ -4,7 +4,7 @@
 #include <cassert>
 #include <cstdint>
 
-trie::trie(): size_(0) {
+trie::trie(): size_(0), prev_search_(false) {
     root_ = create_node();
     iter_ = nullptr;
 }
@@ -69,7 +69,11 @@ void trie::iter_begin() {
     iter_ = root_;
 }
 
-bool trie::exists_key(std::string::const_iterator begin, std::string::const_iterator end, int16_t &value) {
+bool trie::exists(std::string::const_iterator begin, std::string::const_iterator end, int16_t &value) {
+    if (!prev_search_) {
+        iter_begin();
+    }
+
     if (iter_ == nullptr) {
         return false;
     }
@@ -78,20 +82,17 @@ bool trie::exists_key(std::string::const_iterator begin, std::string::const_iter
         char k = 0;
 
         if (!calc_node_index(*it, k)) {
-            iter_begin();
             return false;
         }
 
         if (iter_->next_[k] != nullptr) {
             iter_ = iter_->next_[k];
         } else {
-            iter_begin();
             return false; // key not found
         }
     }
 
     if (iter_ == nullptr) {
-        iter_begin();
         return false;
     } else if (iter_->is_terminal_) {
         value = iter_->value_;
@@ -101,4 +102,10 @@ bool trie::exists_key(std::string::const_iterator begin, std::string::const_iter
     // we found the key in the trie but its not a terminal
     value = -1;
     return true;
+}
+
+bool trie::exists_key(std::string::const_iterator begin, std::string::const_iterator end, int16_t &value) {
+    bool res = exists(begin, end, value);
+    prev_search_ = res;
+    return res;
 }

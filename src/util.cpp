@@ -1,6 +1,6 @@
 #include "util.h"
 #include <iostream>
-#include <algorithms>
+#include <algorithm>
 
 bool is_alpha(const char &ch) {
     if (!((ch <= 'z' && ch >= 'a') || (ch <= 'Z' && ch >= 'A'))) {
