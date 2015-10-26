@@ -1,29 +1,34 @@
-all: main
+BUILD: all
 INCDIR = ./include
 SRCDIR = src
 OBJS = util.o node.o trie.o keyword_matcher.o main.o
-CC = g++
+CXX = g++
 DEBUG = -g
-CFLAGS = -Wall -O3 -c $(DEBUG) -std=c++14
 LFLAGS = -Wall $(DEBUG)
+cxxflags.all := -Wall -O3 -c $(DEBUG) -std=c++14
+cxxflags.benchmark := -Wall -O3 -c $(DEBUG) -std=c++14 -DBENCHMARKING
+CXXFLAGS := ${cxxflags.${BUILD}}
 
-main: $(OBJS)
-	$(CC) $(OBJS) -o main $(LFLAGS)
+all: $(OBJS)
+	$(CXX) $(OBJS) -o main $(LFLAGS)
+	
+bench: $(OBJS)
+	$(CXX) $(OBJS) -o main $(LFLAGS)
 
 util.o: $(INCDIR)/util.h
-	$(CC) $(CFLAGS) -I$(INCDIR) $(SRCDIR)/util.cpp
+	$(CXX) $(CXXFLAGS) -I$(INCDIR) $(SRCDIR)/util.cpp
 
 node.o: $(INCDIR)/node.h
-	$(CC) $(CFLAGS) -I$(INCDIR) $(SRCDIR)/node.cpp
+	$(CXX) $(CXXFLAGS) -I$(INCDIR) $(SRCDIR)/node.cpp
 
 trie.o: $(INCDIR)/trie.h
-	$(CC) $(CFLAGS) -I$(INCDIR) $(SRCDIR)/trie.cpp
+	$(CXX) $(CXXFLAGS) -I$(INCDIR) $(SRCDIR)/trie.cpp
 
 main.o: $(INCDIR)/keyword_matcher.h
-	$(CC) $(CFLAGS) -I$(INCDIR) main.cpp
+	$(CXX) $(CXXFLAGS) -I$(INCDIR) main.cpp
 	    
 keyword_matcher.o: $(INCDIR)/keyword_matcher.h
-	$(CC) $(CFLAGS) -I$(INCDIR) $(SRCDIR)/keyword_matcher.cpp
+	$(CXX) $(CXXFLAGS) -I$(INCDIR) $(SRCDIR)/keyword_matcher.cpp
 
 clean:
 	rm -f *.o main; rm -rf main.dSYM

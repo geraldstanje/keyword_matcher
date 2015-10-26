@@ -5,7 +5,7 @@ from struct import *
 import subprocess
 
 # compile
-os.system('clear; make clean; make')
+os.system('clear; make clean; make BUILD=all')
 
 # run test to check for memory leaks
 pipe = subprocess.Popen(['valgrind', '--tool=memcheck', '--leak-check=full', './main', '-t'], stderr=subprocess.PIPE)
@@ -17,3 +17,14 @@ if stderr_res.find("ERROR SUMMARY: 0 errors") == -1:
   print "valigrind check...failed"
 else:
   print "valigrind check...passed"
+
+# compile
+os.system('clear; make clean; make BUILD=benchmark')
+
+# run test to benchmark the app
+pipe = subprocess.Popen(['./main', '-t'], stderr=subprocess.PIPE)
+stdout, stderr = pipe.communicate()
+stderr_res = stderr.decode('utf-8')  
+pipe.wait()
+
+print stderr_res
