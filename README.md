@@ -38,7 +38,9 @@ url = http://hello.com
 Output:
 110
            
-The Output of "110" means that a keyword (within the bag of words) was found at index 0, and index 1.
+The Output of "110" means that keywords (within the bag of words) are found at index 0, and index 1.
+The index refers to the bag of words, which is read sequentially.
+
 Index 0...he <br>
 Index 1...hel <br>
 Index 2...hi <br>
