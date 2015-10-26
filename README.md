@@ -21,10 +21,11 @@ Keywords can look like:
 # Design
 All keywords are stored in a trie, with key = keyword, value = index to the bag of words vector
 
-At the moment the trie stores 28 characters: a-z and the following special characters: '-' ','
-Insertion in the trie as well as lookup will be with lowercase. All other chracters are ignored.
+The trie stores 28 characters: a-z and the following special characters: '-' ',' at the moment.
+Insertion in the trie as well as lookup will be with lowercase, all other chracters are ignored.
 
 There are two options to build the trie:
+
 1. read the keywords from a file
 2. read the ketwords via command line argument
 
