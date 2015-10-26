@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
     std::vector<std::string> allArgs(argv, argv + argc);
 
     if (allArgs.size() < 2) {
-        std::cerr << "usage: "<< allArgs[0] << " [-u URL] [-t test] [-b benchmark] [-s bag of words string] [-f bag_of_words_file]\n";
+        std::cerr << "usage: "<< allArgs[0] << " [-u URL] [-t test] [-s bag of words string] [-f bag_of_words_file]\n";
         return -1;
     }
 

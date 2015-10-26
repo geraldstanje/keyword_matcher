@@ -1,6 +1,6 @@
 ## Keyword Matcher
 
-# Info
+# About
 This app can take in ad-requests, and parse the URL section of the request to 
 determine if the URL contains any pre-specific words from a list of words.
 
@@ -18,6 +18,21 @@ Keywords can look like:
 * String
 * Target-This-String
 
+# Usage of the App
+./main [-u URL] [-t test] [-s bag of words string] [-f bag_of_words_file]
+
+Command line arguments:
+  * -t ... runs a predefined test
+  * -u ... takes the url string, e.g. -u http://hello.com
+  * -f ... takes a path to the bag of words, e.g. -f dataset/vocab.nytimes.txt
+  * -s ... takes the bag of words (splitted by commas) as a string, e.g. -s he,hel,hi
+
+The app returns a bit vector, indicating if the keyword was found within a bag of words. This format can
+be used by a machine learning algorithm.
+
+# Run Basic test and benchmark
+python compile_and_test.py
+
 # TODO:
-* compress the trie by implemting a Suffix Trie
-* yet another idea could be to implement a Ternary Search Tree: http://c.learncodethehardway.org/book/ex47.html
+  * compress the trie by implemting a Suffix Trie
+  * yet another idea could be to implement a Ternary Search Tree: http://c.learncodethehardway.org/book/ex47.html
