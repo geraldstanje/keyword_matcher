@@ -32,7 +32,7 @@ There are two options to build the trie:
 The keyword search returns a vector, which indicates that the keyword was found, if the value is 1
 
 Example:
-trie = he,hel,hi
+trie = he,hel,hi <br>
 url = http://hello.com
 
 Output:
