@@ -38,23 +38,23 @@ url = http://hello.com
 Output:
 110
 
-Lookup in the trie (read each character from the input string exactly once):
-current trie node: h
-current trie node: t
-current trie node: t
-current trie node: t
-current trie node: p
-current trie node: h
-current trie node: e
-current trie node: l
-current trie node: l
-current trie node: e
-current trie node: l
-current trie node: l
-current trie node: o
-current trie node: c
-current trie node: o
-current trie node: m
+The trie reads each character from the input string exactly once:
+current trie node: h <br>
+current trie node: t <br>
+current trie node: t <br>
+current trie node: t <br>
+current trie node: p <br>
+current trie node: h <br>
+current trie node: e <br>
+current trie node: l <br>
+current trie node: l <br>
+current trie node: e <br>
+current trie node: l <br>
+current trie node: l <br>
+current trie node: o <br>
+current trie node: c <br>
+current trie node: o <br>
+current trie node: m <br>
 
 # Usage of the App
 ./main [-u URL] [-t test] [-s bag of words string] [-f bag_of_words_file]
