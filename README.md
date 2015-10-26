@@ -13,10 +13,10 @@ URL string example:
 http://edition.cnn.com/2015/10/14/opinions/shirky-xiaomi-chinas-apple/index.html
 
 Keywords can look like:
-Target
-This
-String
-Target-This-String
+* Target
+* This
+* String
+* Target-This-String
 
 # TODO:
 * compress the trie by implemting a Suffix Trie
