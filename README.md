@@ -39,9 +39,9 @@ Output:
 110
            
 The Output of "110" means that a keyword (within the bag of words) was found at index 0, and index 1.
-Index 0...he
-Index 1...hel
-Index 2...hi
+Index 0...he <br>
+Index 1...hel <br>
+Index 2...hi <br>
 
 The trie reads each character from the input string exactly once:
 current trie node: h <br>
