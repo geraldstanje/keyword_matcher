@@ -1,5 +1,6 @@
 #include "util.h"
 #include <iostream>
+#include <algorithms>
 
 bool is_alpha(const char &ch) {
     if (!((ch <= 'z' && ch >= 'a') || (ch <= 'Z' && ch >= 'A'))) {
@@ -9,10 +10,7 @@ bool is_alpha(const char &ch) {
 }
 
 void print(std::vector<uint16_t> &vec) {
-    for (uint16_t i = 0; i < vec.size(); i++) {
-        std::cout << vec[i];
-    }
-    std::cout << '\n';
+    std::copy(vec.begin(), vec.end(), std::ostream_iterator<uint16_t>(std::cout));
 }
 
 void split(std::string::iterator begin, std::string::iterator end, std::vector<std::string> &out) {
