@@ -69,6 +69,7 @@ The app returns a bit vector, indicating if the keyword was found within a bag o
 be used by a machine learning algorithm.
 
 # Run Basic test and benchmark
+The following command runs a valgrind check, to detect memroy leaks and starts a unit test for trie and keyword_matcher.
 python compile_and_test.py
 
 # TODO:
