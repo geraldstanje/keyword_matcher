@@ -14,7 +14,7 @@ class argument_parser {
     std::vector<std::string> bag_of_words;
     bool test;
 
-    argument_parser(): test(false), benchmark(false) {}
+    argument_parser(): test(false) {}
     void parse(std::vector<std::string> allArgs) {
         for (uint16_t i = 1; i < allArgs.size(); i++) {
             if (allArgs[i-1] == "-u") { // "http://hello.com"
