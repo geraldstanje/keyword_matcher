@@ -4,6 +4,8 @@
 #include <cassert>
 #include <cstdint>
 
+//#define DEBUG
+
 trie::trie(): size_(0), prev_search_(false) {
     root_ = create_node();
     iter_ = nullptr;
@@ -80,6 +82,10 @@ bool trie::exists_key(std::string::const_iterator begin, std::string::const_iter
         if (!calc_node_index(*it, k)) {
             return false;
         }
+
+#ifdef DEBUG
+        std::cout << "current trie node: " << *it << std::endl;
+#endif
 
         if (iter_->next_[k] != nullptr) {
             iter_ = iter_->next_[k];
