@@ -18,6 +18,43 @@ Keywords can look like:
 * String
 * Target-This-String
 
+# Design
+All keywords are stored in a trie, with key = keyword, value = index to the bag of words vector
+
+At the moment the trie stores 28 characters: a-z and the following special characters: '-' ','
+Insertion in the trie as well as lookup will be with lowercase. All other chracters are ignored.
+
+There are two options to build the trie:
+1. read the keywords from a file
+2. read the ketwords via command line argument
+
+The keyword search returns a vector, which indicates that the keyword was found, if the value is 1
+
+Example:
+trie = he,hel,hi
+url = http://hello.com
+
+Output:
+110
+
+Lookup in the trie (read each character from the input string exactly once):
+current trie node: h
+current trie node: t
+current trie node: t
+current trie node: t
+current trie node: p
+current trie node: h
+current trie node: e
+current trie node: l
+current trie node: l
+current trie node: e
+current trie node: l
+current trie node: l
+current trie node: o
+current trie node: c
+current trie node: o
+current trie node: m
+
 # Usage of the App
 ./main [-u URL] [-t test] [-s bag of words string] [-f bag_of_words_file]
 
