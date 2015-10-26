@@ -15,7 +15,6 @@ class trie {
   private:
     node *create_node();
     void delete_node(node *n);
-    void iter_begin();
 
   public:
     trie();
@@ -23,8 +22,8 @@ class trie {
     void erase();
     uint16_t size() const;
     bool insert(const std::string key, const int16_t value);
-    bool exists(std::string::const_iterator begin, std::string::const_iterator end, int16_t &value);
     bool exists_key(std::string::const_iterator begin, std::string::const_iterator end, int16_t &value);
+    bool exists_key_store_iter(std::string::const_iterator begin, std::string::const_iterator end, int16_t &value);
 };
 
 #endif

@@ -61,17 +61,13 @@ bool trie::insert(const std::string key, const int16_t value) {
     tmp->is_end_ = true;
     tmp->value_ = value;
     size_++;
-    iter_begin();
+    iter_ = root_;
     return true;
 }
 
-void trie::iter_begin() {
-    iter_ = root_;
-}
-
-bool trie::exists(std::string::const_iterator begin, std::string::const_iterator end, int16_t &value) {
+bool trie::exists_key(std::string::const_iterator begin, std::string::const_iterator end, int16_t &value) {
     if (!prev_search_) {
-        iter_begin();
+        iter_ = root_;
     }
 
     if (iter_ == nullptr) {
@@ -104,7 +100,7 @@ bool trie::exists(std::string::const_iterator begin, std::string::const_iterator
     return true;
 }
 
-bool trie::exists_key(std::string::const_iterator begin, std::string::const_iterator end, int16_t &value) {
-    prev_search_ = exists(begin, end, value);
+bool trie::exists_key_store_iter(std::string::const_iterator begin, std::string::const_iterator end, int16_t &value) {
+    prev_search_ = exists_key(begin, end, value);
     return prev_search_;
 }

@@ -55,7 +55,7 @@ std::vector<uint16_t> keyword_matcher::match_keywords(const std::string &url) {
         for (uint16_t len = 1; len <= url.size() - start; len++) {
             index = 0;
 
-            bool key_exists = trie_.exists_key(url.begin() + start + offset, url.begin() + start + len, index);
+            bool key_exists = trie_.exists_key_store_iter(url.begin() + start + offset, url.begin() + start + len, index);
             if (key_exists && index != -1) {
                 vec[index] = 1;
             }
