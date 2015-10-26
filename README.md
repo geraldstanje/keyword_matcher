@@ -22,7 +22,7 @@ Keywords can look like:
 All keywords are stored in a trie, with key = keyword, value = index to the bag of words vector
 
 The trie stores 28 characters: a-z and the following special characters: '-' ',' at the moment.
-Insertion in the trie as well as lookup will be with lowercase, all other chracters are ignored.
+Insertion in the trie as well as lookup will be with lowercase.
 
 There are two options to build the trie:
 
