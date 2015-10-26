@@ -4,8 +4,6 @@
 #include <chrono>
 #include <cstdint>
 
-//#define BENCHMARKING
-
 keyword_matcher::keyword_matcher(): bag_of_words_size_(0) {
 }
 
@@ -73,7 +71,7 @@ std::vector<uint16_t> keyword_matcher::match_keywords(const std::string &url) {
 #ifdef BENCHMARKING
     auto end = std::chrono::steady_clock::now();
     auto diff = end - start;
-    std::cerr << std::chrono::duration <double, std::milli> (diff).count();
+    std::cerr << std::chrono::duration <double, std::milli> (diff).count() << '\n';
 #endif
 
     return vec;

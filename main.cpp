@@ -14,7 +14,7 @@ class argument_parser {
     std::vector<std::string> bag_of_words;
     bool test;
 
-    argument_parser(): test(false) {}
+    argument_parser(): test(false), benchmark(false) {}
     void parse(std::vector<std::string> allArgs) {
         for (uint16_t i = 1; i < allArgs.size(); i++) {
             if (allArgs[i-1] == "-u") { // "http://hello.com"
@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
     std::vector<std::string> allArgs(argv, argv + argc);
 
     if (allArgs.size() < 2) {
-        std::cerr << "usage: "<< allArgs[0] << " [-u URL] [-s bag of words string] [-f bag_of_words_file]\n";
+        std::cerr << "usage: "<< allArgs[0] << " [-u URL] [-t test] [-b benchmark] [-s bag of words string] [-f bag_of_words_file]\n";
         return -1;
     }
 
@@ -46,18 +46,18 @@ int main(int argc, char *argv[]) {
 
         m.load_bag_of_words(std::vector<std::string> {"he", "hel", "hi"});
         auto vec1 = m.match_keywords("http://hello.com");
-        print(vec1);
 
         m.load_bag_of_words("dataset/vocab.nytimes.txt");
         auto vec2 = m.match_keywords("http://hello.com");
-        print(vec2);
     } else if (!a.url.empty()) {
         keyword_matcher m;
+
         if (!a.bag_of_words_path.empty()) {
             m.load_bag_of_words(a.bag_of_words_path);
         } else if (!a.bag_of_words.empty()) {
             m.load_bag_of_words(a.bag_of_words);
         }
+
         auto vec = m.match_keywords(a.url);
         print(vec);
     }
