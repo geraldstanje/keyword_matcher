@@ -93,8 +93,7 @@ bool trie::exists_key(std::string::const_iterator begin, std::string::const_iter
     if (iter_ == nullptr) {
         iter_begin();
         return false;
-    }
-    else if (iter_->is_terminal_) {
+    } else if (iter_->is_terminal_) {
         value = iter_->value_;
         return true;
     }
