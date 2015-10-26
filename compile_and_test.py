@@ -8,7 +8,7 @@ import subprocess
 os.system('clear; make clean; make')
 
 # run test to check for memory leaks
-pipe = subprocess.Popen(['valgrind', '--tool=memcheck', '--leak-check=full', './main'], stderr=subprocess.PIPE)
+pipe = subprocess.Popen(['valgrind', '--tool=memcheck', '--leak-check=full', './main', '-t'], stderr=subprocess.PIPE)
 stdout, stderr = pipe.communicate()
 stderr_res = stderr.decode('utf-8')  
 pipe.wait()
