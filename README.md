@@ -37,6 +37,11 @@ url = http://hello.com
 
 Output:
 110
+           
+The Output of "110" means that a keyword (within the bag of words) was found at index 0, and index 1.
+Index 0...he
+Index 1...hel
+Index 2...hi
 
 The trie reads each character from the input string exactly once:
 current trie node: h <br>
