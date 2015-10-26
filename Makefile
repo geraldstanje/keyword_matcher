@@ -44,4 +44,4 @@ keyword_matcher.o: $(INCDIR)/keyword_matcher.h
 	$(CXX) $(CXXFLAGS) -I$(INCDIR) $(SRCDIR)/keyword_matcher.cpp
 
 clean:
-	rm -f *.o main main_test main_bench; rm -rf main.dSYM
+	rm -f *.o main main_test main_bench; rm -rf main.dSYM; rm -rf main_test.dSYM
