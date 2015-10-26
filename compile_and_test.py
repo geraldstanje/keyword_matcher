@@ -3,28 +3,36 @@
 import os
 from struct import *
 import subprocess
+import shlex
 
-# compile
-os.system('clear; make clean; make BUILD=all')
+def run_sub_process(mylist):
+  pipe = subprocess.Popen(mylist, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+  stdout, stderr = pipe.communicate()
+  stdout_test = stdout.decode('utf-8')
+  stderr_res = stderr.decode('utf-8')
+  return stdout, stderr_res
 
-# run test to check for memory leaks
-pipe = subprocess.Popen(['valgrind', '--tool=memcheck', '--leak-check=full', './main', '-t'], stderr=subprocess.PIPE)
-stdout, stderr = pipe.communicate()
-stderr_res = stderr.decode('utf-8')  
-pipe.wait()
+def main():
+  # compile unit test
+  run_sub_process(['make', 'clean'])
+  run_sub_process(['make', 'BUILD=test'])
 
-if stderr_res.find("ERROR SUMMARY: 0 errors") == -1:
-  print "valigrind check...failed"
-else:
-  print "valigrind check...passed"
+  # run unit test to check for memory leaks
+  stdout_res, stderr_res = run_sub_process(['valgrind', '--tool=memcheck', '--leak-check=full', './main', '-t'])
 
-# compile
-os.system('clear; make clean; make BUILD=benchmark')
+  if stderr_res.find("ERROR SUMMARY: 0 errors") == -1:
+    print "valigrind check...failed"
+  else:
+    print "valigrind check...passed"
 
-# run test to benchmark the app
-pipe = subprocess.Popen(['./main', '-t'], stderr=subprocess.PIPE)
-stdout, stderr = pipe.communicate()
-stderr_res = stderr.decode('utf-8')  
-pipe.wait()
+  # compile benchmark test
+  run_sub_process(['make', 'clean'])
+  run_sub_process(['make', 'BUILD=benchmark'])
 
-print stderr_res
+  # run benchmark to benchmark the app
+  stdout_res, stderr_res = run_sub_process(['./main', '-t'])
+  
+  print "benchmark in ms:\n" + stderr_res
+
+if __name__ == "__main__":
+  main()
