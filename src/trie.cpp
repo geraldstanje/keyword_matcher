@@ -105,7 +105,6 @@ bool trie::exists(std::string::const_iterator begin, std::string::const_iterator
 }
 
 bool trie::exists_key(std::string::const_iterator begin, std::string::const_iterator end, int16_t &value) {
-    bool res = exists(begin, end, value);
-    prev_search_ = res;
-    return res;
+    prev_search_ = exists(begin, end, value);
+    return prev_search_;
 }
