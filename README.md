@@ -1,5 +1,6 @@
 ## Keyword Matcher
 
+# Info
 This app can take in ad-requests, and parse the URL section of the request to 
 determine if the URL contains any pre-specific words from a list of words.
 
@@ -17,6 +18,6 @@ This
 String
 Target-This-String
 
-TODO:
-** compress the trie by implemting a Suffix Trie
-** yet another idea could be to implement a Ternary Search Tree: http://c.learncodethehardway.org/book/ex47.html
+# TODO:
+* compress the trie by implemting a Suffix Trie
+* yet another idea could be to implement a Ternary Search Tree: http://c.learncodethehardway.org/book/ex47.html
