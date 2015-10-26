@@ -25,7 +25,7 @@ Command line arguments:
   * -t ... runs a predefined test
   * -u ... takes the url string, e.g. -u http://hello.com
   * -f ... takes a path to the bag of words, e.g. -f dataset/vocab.nytimes.txt
-  * -s ... takes the bag of words (splitted by commas) as a string, e.g. -s he,hel,hi
+  * -s ... takes the bag of words (comma-separated) as a string, e.g. -s he,hel,hi
 
 The app returns a bit vector, indicating if the keyword was found within a bag of words. This format can
 be used by a machine learning algorithm.
