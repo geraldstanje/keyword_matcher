@@ -18,21 +18,39 @@ Keywords can look like:
 * String
 * Target-This-String
 
+Keywords can look like:
+* Target
+* This
+* String
+* Target-This-String
+
+Before an ad auction happens, there is a "data provider" stage where additional information on the auction 
+can be added. As the overall auction is ~150ms, we only have ~10ms to add in this suplemental data to the auction.
+
+Buyers can then target this "has a keyword" segment and make campaigns that only target URLs with ertain words.
+
 # Design
 All keywords are stored in a trie, with key = keyword, value = index to the bag of words vector
 
-The trie stores 28 characters: a-z and the following special characters: '-' '_' at the moment.
+The trie stores 28 characters: a-z and the following special characters: '-' '_'.
 Insertion in the trie as well as lookup will be with lowercase.
 
 There are two options to build the trie:
 
-1. read the keywords from a file
-2. read the ketwords via command line argument
+1. read the keywords (bag of words) from a file
+2. read the keywords (bag of words) via command line argument
 
-The keyword search returns a vector, which indicates that the keyword was found, if the value is 1
+After the trie is built, the output vector is allocated within keyword_matcher::load_bag_of_words. 
 
-Example:
-trie = he,hel,hi <br>
+The function keyword_matcher::match_keywords would take a url string and return a vector with the size of the 
+bag of words, storing one's and zero's only. A one at index x means the a keyword within the bag of words was found.
+The function match_keywords only initializes the output vector to zero, rather than allocating it. <br>
+For performance reason the type of the output vector was specified with std::vector< uint16_t>, rather than
+std::vector< bool>. If the size of the bag of words would be known at compile time, a bitset could be selected. 
+A std::bitset<32> could also be stored in 4 bytes memory. <br>
+
+Example: <br>
+trie with 3 words = he,hel,hi <br>
 url = http://hello.com
 
 Output:
@@ -45,7 +63,7 @@ Index 0...he <br>
 Index 1...hel <br>
 Index 2...hi <br>
 
-The trie reads each character from the input string exactly once:
+The trie reads each character from the input string exactly once: <br>
 current trie node: h <br>
 current trie node: t <br>
 current trie node: t <br>
@@ -64,10 +82,9 @@ current trie node: o <br>
 current trie node: m <br>
 
 # Usage of the App
-./main [-u URL] [-t test] [-s bag of words string] [-f bag_of_words_file]
+./main [-u URL] [-s bag of words string] [-f bag_of_words_file]
 
 Command line arguments:
-  * -t ... runs a system test
   * -u ... takes the url string, e.g. -u http://hello.com
   * -f ... takes a path to the bag of words, e.g. -f dataset/vocab.nytimes.txt
   * -s ... takes the bag of words (comma-separated) as a string, e.g. -s he,hel,hi
@@ -81,5 +98,7 @@ The following command runs a valgrind check, to detect memroy leaks and starts a
 $ python compile_and_test.py
 
 # TODO:
-  * compress the trie by implemting a Suffix Trie
+  * compress the trie by implementing a Suffix Trie
   * yet another idea could be to implement a Ternary Search Tree: http://c.learncodethehardway.org/book/ex47.html
+  * add more testing
+  * code profiling, in order to further improve the performance of the code
